@@ -1,37 +1,9 @@
-# Übung 4
+# Übung 5
 
-1. Entfernen des @change-Events von der RadioButtonGroup in der BasemapChangerWidget.vue:
-
-```javascript
-<v-radio-group v-model="selectedId">
-    <v-radio
-        v-for="basemap in basemaps"
-        :key="basemap.id"
-        :label="basemap.title"
-        :value="basemap.id"
-    ></v-radio>
-</v-radio-group>
-```
-
-2. Entfernen der changeBasemap-Methode in der BasemapChangerWidget.vue:
+1. _initComponent-Methode hinzufügen, welche die Vue-Komponente erzeugt und in einem Symbol speichert:
 
 ```javascript
-export default {
-    components: {},
-    mixins: [Bindable],
-    data: function () {
-        return {
-            selectedId: undefined,
-            basemaps: []
-        };
-    }
-};
-```
-
-3. Entfernen des Bindings an das changeBasemap-Event. Verwendung der "apprt-binding/Binding"-Klasse zur erzeugen eines Bindings:
-
-```javascript
-createInstance() {
+_initComponent() {
     const basemapsModel = this._basemapsModel;
     const basemaps = basemapsModel.basemaps.map((basemap) => {
         return {
@@ -40,14 +12,34 @@ createInstance() {
         }
     });
 
-    let vm = new Vue(BasemapChangerWidget);
+    const vm = this[_vm] = new Vue(BasemapChangerWidget);
 
-    Binding.for(vm, basemapsModel)
+    this[_binding] = Binding.for(vm, basemapsModel)
         .syncAll("selectedId")
         .syncAllToLeft("basemaps")
         .syncToLeftNow()
         .enable();
+}
+```
 
-    return VueDijit(vm);
+2. Vue-Komponente in der createInstance-Methode zurückgeben:
+
+```javascript
+createInstance() {
+    return VueDijit(this[_vm]);
+}
+```
+
+3. activate und deactivate-Methoden hinzufügen, die beim Starten und Beenden des Bundles aufgerufen werden:
+
+```javascript
+activate() {
+    this._initComponent();
+}
+
+deactivate() {
+    this[_binding].unbind();
+    this[_binding] = undefined;
+    this[_vm] = undefined;
 }
 ```
