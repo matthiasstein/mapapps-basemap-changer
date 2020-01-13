@@ -508,6 +508,23 @@
                         },
                         "container": "ignore",
                         "windowType": "drawer_left"
+                    },
+                    {
+                        "id": "dropdown",
+                        "cssClass": "ctWDYWBtn ctPrimaryInput",
+                        "title": "Was möchten Sie tun?",
+                        "tools": [
+                            "tocToggleTool",
+                            "printingToggleTool",
+                            "sharelinkTool",
+                            "basemapChangerToggleTool"
+                        ],
+                        "container": "map",
+                        "position": {
+                            "rel_t": 80,
+                            "rel_l": 20
+                        },
+                        "windowType": "dropdown"
                     }
                 ]
             }
