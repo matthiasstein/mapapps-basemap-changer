@@ -1,5 +1,5 @@
 <template>
-    <v-container grid-list-md text-xs-center>
+    <v-container grid-list-md>
         <v-layout row wrap>Test</v-layout>
     </v-container>
 </template>
