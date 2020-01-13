@@ -1,8 +1,8 @@
 {
     "name": "basemapchanger",
     "version": "1.0.0",
-    "title": "${tool.title}",
-    "description": "",
+    "title": "${bundleName}",
+    "description": "${bundleDescription}",
     "dependencies": {
         "esri": "^4.10.0",
         "apprt-vue": "^4.7.0",
