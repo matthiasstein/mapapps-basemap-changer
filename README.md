@@ -1,45 +1,30 @@
-# Übung 5
+# Übung 6
 
-1. _initComponent-Methode hinzufügen, welche die Vue-Komponente erzeugt und in einem Symbol speichert:
-
-```javascript
-_initComponent() {
-    const basemapsModel = this._basemapsModel;
-    const basemaps = basemapsModel.basemaps.map((basemap) => {
-        return {
-            id: basemap.id,
-            title: basemap.title
-        }
-    });
-
-    const vm = this[_vm] = new Vue(BasemapChangerWidget);
-
-    this[_binding] = Binding.for(vm, basemapsModel)
-        .syncAll("selectedId")
-        .syncAllToLeft("basemaps")
-        .syncToLeftNow()
-        .enable();
-}
-```
-
-2. Vue-Komponente in der createInstance-Methode zurückgeben:
+Add a new Dropdown-Toolset to the toolset configuration in the app.json:
 
 ```javascript
-createInstance() {
-    return VueDijit(this[_vm]);
-}
-```
-
-3. activate und deactivate-Methoden hinzufügen, die beim Starten und Beenden des Bundles aufgerufen werden:
-
-```javascript
-activate() {
-    this._initComponent();
-}
-
-deactivate() {
-    this[_binding].unbind();
-    this[_binding] = undefined;
-    this[_vm] = undefined;
+"toolset": {
+    "ToolsetManager": {
+        "toolsets": [
+            ...,
+            {
+                "id": "dropdown",
+                "cssClass": "ctWDYWBtn ctPrimaryInput",
+                "title": "Was möchten Sie tun?",
+                "tools": [
+                    "tocToggleTool",
+                    "printingToggleTool",
+                    "sharelinkTool",
+                    "basemapChangerToggleTool"
+                ],
+                "container": "map",
+                "position": {
+                    "rel_t": 80,
+                    "rel_l": 20
+                },
+                "windowType": "dropdown"
+            }
+        ]
+    }
 }
 ```
