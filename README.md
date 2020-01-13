@@ -1,6 +1,6 @@
-# Übung 6
+# Übung 7
 
-Add a new Dropdown-Toolset to the toolset configuration in the app.json:
+1. Add a new Dropdown-Toolset to the toolset configuration in the app.json:
 
 ```javascript
 "toolset": {
